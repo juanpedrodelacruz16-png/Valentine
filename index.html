@@ -1,0 +1,174 @@
+<!DOCTYPE html><html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>San Valentín para Abigail 💘</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #fff0f5;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      overflow: hidden;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border-radius: 22px;
+      padding: 36px 28px 32px;
+      max-width: 420px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      animation: fadeIn 1.4s ease;
+      position: relative;
+    }
+    h1 { font-size: 2.1em; margin-bottom: 6px; color: #d90429; }
+    h2 { font-weight: normal; margin-bottom: 16px; }
+    p { font-size: 1.05em; line-height: 1.6; color: #000; }
+    .heart { font-size: 2.8em; animation: pulse 1.2s infinite; margin: 10px 0 6px; }.question { margin-top: 14px; font-size: 1.15em; }
+
+.buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 18px;
+  position: relative;
+  height: 70px;
+}
+
+button {
+  background: #fff;
+  color: #ff4d6d;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 30px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+button:hover { transform: scale(1.06); }
+
+#btnNo {
+  background: #e63946;
+  color: #fff;
+  font-weight: 700;
+  position: absolute;
+  right: 0;
+}
+
+.gif {
+  width: 220px;
+  max-width: 100%;
+  border-radius: 14px;
+  margin: 14px auto 6px;
+  display: none;
+}
+
+footer {
+  margin-top: 16px;
+  font-size: 0.85em;
+  opacity: 0.95;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+  </style>
+</head>
+<body>
+  <div class="card" style="background:none;box-shadow:none;">
+    <h1>Feliz San Valentín 💘</h1><img class="gif" style="display:block;margin:10px auto 6px;" src="https://share.google/Dou62kG323MXd8L94" alt="Corazón romántico" />
+
+<p>
+  Eres una persona linda, divertida y aunque complicada… ya me tienes calvo del estrés jajaja pero aun así te quiero, te valoro y te amo.
+</p>
+
+<p class="question"><strong>¿Quieres ser mi novia?</strong></p>
+
+<img id="gifPregunta" class="gif" src="sandbox:/mnt/data/1770062206264409944087364232942" alt="Gif romántico" style="display:block;" />
+<img id="gifTriste" class="gif" src="https://media.giphy.com/media/OPU6wzx8JrHna/giphy.gif" alt="Gif triste" />
+<img id="gifSi" class="gif" src="https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif" alt="Gatitos besándose" />
+
+<div class="buttons">
+  <button id="btnSi" style="background:#2ecc71;color:#fff;font-weight:700;">SI</button>
+  <button id="btnNo" style="background:#e63946;color:#fff;font-weight:700;">NO</button>
+</div>
+
+<p id="resultado" style="margin-top:12px; font-weight:600;"></p>
+
+<footer>
+  Con cariño,<br />
+  <strong>Carlos</strong>
+</footer>
+
+  </div>  <script>
+    const btnSi = document.getElementById('btnSi');
+    const btnNo = document.getElementById('btnNo');
+    const gifPregunta = document.getElementById('gifPregunta');
+    const gifTriste = document.getElementById('gifTriste');
+    const gifSi = document.getElementById('gifSi');
+    const resultado = document.getElementById('resultado');
+
+    let noClicks = 0;
+    let siScale = 1;
+
+    // Mostrar gif romántico al cargar
+    gifPregunta.style.display = 'block';
+
+    btnNo.addEventListener('click', () => {
+      // mover el botón NO a una posición aleatoria
+      const container = document.querySelector('.buttons');
+      const rect = container.getBoundingClientRect();
+      const maxX = rect.width - btnNo.offsetWidth;
+      const maxY = rect.height - btnNo.offsetHeight;
+      const x = Math.random() * Math.max(0, maxX);
+      const y = Math.random() * Math.max(0, maxY);
+      btnNo.style.left = x + 'px';
+      btnNo.style.top = y + 'px';
+      noClicks++;
+      // Hacer el botón "Sí" más grande cada vez
+      siScale += 0.15;
+      btnSi.style.transform = `scale(${siScale})`;
+
+      // Mostrar gif triste
+      gifTriste.style.display = 'block';
+      gifPregunta.style.display = 'none';
+
+      // Mensajes suaves (no agresivos)
+      const mensajes = [
+        '¿Segura? 🥺',
+        'Piénsalo otra vez…',
+        'Prometo cuidarte 💔',
+        'Ok… intento una vez más 😢'
+      ];
+      resultado.textContent = mensajes[Math.min(noClicks - 1, mensajes.length - 1)];
+    });
+
+    btnSi.addEventListener('click', () => {
+      // Mostrar gif de gatitos
+      gifSi.src = 'https://pin.it/kxi3PogfS';
+      gifSi.style.display = 'block';
+      gifTriste.style.display = 'none';
+      gifPregunta.style.display = 'none';
+
+      // Mostrar solo el mensaje final
+      resultado.textContent = 'Sabías que dirías que sí… así sea por las malas, nomito';
+
+      // Ocultar botones
+      document.querySelector('.buttons').style.display = 'none';
+    });
+  </script></body>
+</html>
